@@ -25,7 +25,7 @@ export default function Sucesso() {
 }
 
 const SucessPage = styled.div`
-background-color: #E5E5E5;
+background-color: #FFFFFF;
 `
 
 const SpanSucesso = styled.span`

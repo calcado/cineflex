@@ -1,0 +1,126 @@
+import styled from "styled-components";
+
+
+export default function Assento({name, id, disponivel,selecionados, setSelecionados}){
+    
+    function selecionarAssento(id){
+        
+        if( selecionados.includes(id)){
+            const arr = selecionados.filter((p) => {return p!==id} )
+            setSelecionados(arr)
+        }else{
+            setSelecionados([...selecionados, id])
+        }
+    }
+    // function Seat({ seats, setSeat}) {
+    //     return (
+    //       <>
+    //         {!seat.selected ? (
+    //           <div className={`seat ${seat.status}`} 
+    //                           onClick={() => handleSeat(seat)}>
+    //             {seat.id}
+    //           </div>
+    //         ) : (
+    //           <div className={`seat selected`} 
+    //                           onClick={() => handleSeat(seat)}>
+    //             {seat.id}
+    //           </div>
+    //         )}
+    //       </>
+    //     );
+    //   }
+    return disponivel === true ? (
+      name < 10 ? (
+        <AssentoDisponivel onClick={()=> selecionarAssento(id)} selecionado={selecionados.includes(id)}>
+          <p>0{name}</p>
+        </AssentoDisponivel>
+      ) : (
+        <AssentoDisponivel onClick={()=> selecionarAssento(id)} selecionado={selecionados.includes(id)}>
+          <p>{name}</p>
+        </AssentoDisponivel>
+      )
+    ) : name < 10 ? (
+      <AssentoIndisponivel onClick={() => alert("Este assento não está disponível")}>
+        <p>0{name}</p>
+      </AssentoIndisponivel>
+    ) : (
+      <AssentoIndisponivel onClick={() => alert("Este assento não está disponível")}>
+        <p>{name}</p>
+      </AssentoIndisponivel>
+    );
+    // name < 10 ?
+    // <Cadeira>
+    // <p>0{name}</p>
+    // </Cadeira>
+    // :<Cadeira>
+    // <p>{name}</p>
+    // </Cadeira>
+
+}
+const Cadeira = styled.li`
+background-color: #C3CFD9;
+height: 26px;
+width: 26px;
+border-radius: 12px;
+border: 1px solid #808F9D;
+display: flex;
+justify-content: center;
+align-items: center;
+p{
+
+font-family: 'Roboto', sans-serif;
+font-size: 11px;
+font-weight: 400;
+}
+`
+
+// const AssentoSelecionado = styled.span`
+// width: 26px;
+// height: 26px;
+// border-radius: 17px;
+// border: 1px solid #0E7D71;
+// background-color: #1AAE9E;
+// display: flex;
+// justify-content: center;
+// align-items: center;
+// p{
+
+// font-family: 'Roboto', sans-serif;
+// font-size: 11px;
+// font-weight: 400;
+// }
+// `
+const AssentoDisponivel= styled.span`
+width: 26px;
+height: 26px;
+border-radius: 17px;
+border: 1px solid #0E7D71;
+background-color:${props => props.selecionado ? "#1AAE9E" : "#C3CFD9"};
+display: flex;
+justify-content: center;
+align-items: center;
+cursor: pointer;
+p{
+
+font-family: 'Roboto', sans-serif;
+font-size: 11px;
+font-weight: 400;
+}
+`
+const AssentoIndisponivel = styled.span`
+width: 26px;
+height: 26px;
+border-radius: 17px;
+border: 1px solid #0E7D71;
+background-color: #FBE192;
+display: flex;
+justify-content: center;
+align-items: center;
+cursor: pointer;
+p{
+
+font-family: 'Roboto', sans-serif;
+font-size: 11px;
+font-weight: 400;
+}
+`

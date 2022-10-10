@@ -1,42 +1,58 @@
 import axios from 'axios'
 import {useState , useEffect} from 'react'
+import { Link, useParams } from 'react-router-dom'
 import styled from 'styled-components'
 
-export default function Sessoes(){
-    const [session, setSession]= useState([])
-    
-    useEffect(()=>{
-        const URL = "https://mock-api.driven.com.br/api/v5/cineflex/movies/${filme.id}/showtimes"
-        const requisicao = axios.get(URL)
-        requisicao.then((resposta)=>setSession(resposta.data.days))
-        requisicao.catch(erro=>{console.log(erro.response.data)})
-    },[])
 
-    return (
-        <>
-            <SessionPage>
-                <Selecione>Selecione o horário</Selecione>
-                <SessionLayout>
-                    <Day>Dia da Semana - data</Day>
-                    <Hour>Hora</Hour>
-                </SessionLayout>
-            </SessionPage>
-            <Footer>
-                <Img src="" alt="" />
-                <Titulo>Titulo Filme</Titulo>
+export default function Sessoes({session, setSession,titulo, setTitulo}){
+  const { idFilme } = useParams();
 
-            </Footer>
-        </>
-    )
+  useEffect(() => {
+    const URL = `https://mock-api.driven.com.br/api/v5/cineflex/movies/${idFilme}/showtimes`;
+    const requisicao = axios.get(URL);
+    requisicao.then((resposta) => setSession(resposta.data));
 
+    requisicao.catch((erro) => {
+      console.log(erro.response.data);
+    });
+  }, []);
+  if (session.days === undefined) {
+    return <p>carregando</p>;
+  }
 
-
+  return (
+    <>
+      <SessionPage>
+        <Selecione>Selecione o horário</Selecione>
+        <SessionLayout>
+          {session.days.map((sessao) => (
+            <SessaoId key={sessao.id}>
+              <Day>
+                {sessao.weekday} - {sessao.date}
+              </Day>
+              <Hours>
+              {sessao.showtimes.map((hora) => <Link to={`/assentos/${hora.id}`} key={hora.id} ><Hour> {hora.name}</Hour></Link>)}
+              </Hours>
+            </SessaoId>
+          ))}
+        </SessionLayout>
+      </SessionPage>
+      <Footer>
+        <Img src={session.posterlURL} alt={titulo} />
+        <Titulo>{session.title}</Titulo>
+      </Footer>
+    </>
+  );
 }
 
 const SessionPage = styled.div`
-background-color: #E5E5E5;
-
+background-color: #FFFFFF;
+overflow-y: auto;
+/* width: 100%;
+height: 100%;
+margin-bottom: 117px; */
 `
+
 const Selecione = styled.span`
 display: flex;
 justify-content: center;
@@ -79,7 +95,9 @@ font-size: 20px;
 color: #293845;
 margin-bottom: 22px;
 `
-
+const Hours = styled.div`
+display: flex;
+`
 const Hour = styled.button`
 background-color: #E8833A;
 width: 83px;
@@ -90,4 +108,11 @@ font-family: 'Roboto',sans-serif;
 font-weight: 400;
 font-size: 18px;
 margin-right: 9px;
+`
+const SessaoId = styled.li`
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: initial;
+margin-bottom: 23px;
 `

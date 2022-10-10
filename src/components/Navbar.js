@@ -9,6 +9,9 @@ export default function Navbar(){
 const Logo = styled.h1`
 width: 100%;
 height: 67px;
+display: flex;
+justify-content: center;
+align-items: center;
 background-color: #C3CFD9;
 p{
 font-family:'Roboto', 'sans-serif';

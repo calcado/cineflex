@@ -2,23 +2,21 @@ import axios from 'axios';
 import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
-export default function PaginaPrincipal() {
-    const [filmes, setFilme] = useState([]);
+export default function PaginaPrincipal({filmes, setFilme, idFilme , setIdFilme}) {
+    // const [filmes, setFilme] = useState([]);
 
-    useEffect(() => {
-        const URL = "https://mock-api.driven.com.br/api/v5/cineflex/movies";
-        const requisicao = axios.get(URL);
-
-        requisicao.then((resposta) => setFilme(resposta.data))
-        
-        requisicao.catch((erro) => console.log(erro.response.data))
-    },[])
+    // useEffect(() => {
+    //     const URL = "https://mock-api.driven.com.br/api/v5/cineflex/movies";
+    //     const requisicao = axios.get(URL);
+    //     requisicao.then((resposta) => setFilme(resposta.data))
+    //     requisicao.catch((erro) => console.log(erro.response.data))
+    // },[])
 
     return (
         <MainPage>
             <Selecione>Selecione o Filme</Selecione>
             <Lista>
-            {filmes.map(filme => <li> <Cartaz key={filme.id} src={filme.posterURL} alt={filme.title}/></li>)}
+            {filmes.map(filme => <li key={filme.id}><Cartaz  src={filme.posterURL} alt={filme.title}/></li>)}
 
             </Lista>
         </MainPage>

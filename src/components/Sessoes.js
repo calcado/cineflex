@@ -38,7 +38,7 @@ export default function Sessoes({session, setSession,titulo, setTitulo}){
         </SessionLayout>
       </SessionPage>
       <Footer>
-        <Img src={session.posterlURL} alt={titulo} />
+        <Img src={session.posterURL} alt={titulo} />
         <Titulo>{session.title}</Titulo>
       </Footer>
     </>
@@ -66,7 +66,7 @@ color: #293845;
 `
 
 const Footer = styled.div`
-background-color: #9EADBA;
+background-color: #DFE6ED;
 display: flex;
 align-items: center;
 `

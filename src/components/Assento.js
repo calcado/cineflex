@@ -1,41 +1,34 @@
+import { Form } from "react-router-dom";
 import styled from "styled-components";
 
 
-export default function Assento({name, id, disponivel,selecionados, setSelecionados}){
-    
-    function selecionarAssento(id){
-        
+export default function Assento({name, id, disponivel,selecionados, setSelecionados,form,setForm, nameAssento, setNameAssento}){
+
+    function selecionarAssento(id,name){
+      
         if( selecionados.includes(id)){
             const arr = selecionados.filter((p) => {return p!==id} )
             setSelecionados(arr)
+            const names = nameAssento.filter((n) => {return n!==name} )
+            setNameAssento(names)
         }else{
+
             setSelecionados([...selecionados, id])
+            setNameAssento([...nameAssento, name])
+            
         }
+
+        
     }
-    // function Seat({ seats, setSeat}) {
-    //     return (
-    //       <>
-    //         {!seat.selected ? (
-    //           <div className={`seat ${seat.status}`} 
-    //                           onClick={() => handleSeat(seat)}>
-    //             {seat.id}
-    //           </div>
-    //         ) : (
-    //           <div className={`seat selected`} 
-    //                           onClick={() => handleSeat(seat)}>
-    //             {seat.id}
-    //           </div>
-    //         )}
-    //       </>
-    //     );
-    //   }
+   
+
     return disponivel === true ? (
       name < 10 ? (
-        <AssentoDisponivel onClick={()=> selecionarAssento(id)} selecionado={selecionados.includes(id)}>
+        <AssentoDisponivel onClick={()=> selecionarAssento(id, name)} selecionado={selecionados.includes(id)}>
           <p>0{name}</p>
         </AssentoDisponivel>
       ) : (
-        <AssentoDisponivel onClick={()=> selecionarAssento(id)} selecionado={selecionados.includes(id)}>
+        <AssentoDisponivel onClick={()=> selecionarAssento(id, name )} selecionado={selecionados.includes(id)}>
           <p>{name}</p>
         </AssentoDisponivel>
       )
@@ -48,14 +41,7 @@ export default function Assento({name, id, disponivel,selecionados, setSeleciona
         <p>{name}</p>
       </AssentoIndisponivel>
     );
-    // name < 10 ?
-    // <Cadeira>
-    // <p>0{name}</p>
-    // </Cadeira>
-    // :<Cadeira>
-    // <p>{name}</p>
-    // </Cadeira>
-
+    
 }
 const Cadeira = styled.li`
 background-color: #C3CFD9;
@@ -74,22 +60,6 @@ font-weight: 400;
 }
 `
 
-// const AssentoSelecionado = styled.span`
-// width: 26px;
-// height: 26px;
-// border-radius: 17px;
-// border: 1px solid #0E7D71;
-// background-color: #1AAE9E;
-// display: flex;
-// justify-content: center;
-// align-items: center;
-// p{
-
-// font-family: 'Roboto', sans-serif;
-// font-size: 11px;
-// font-weight: 400;
-// }
-// `
 const AssentoDisponivel= styled.span`
 width: 26px;
 height: 26px;

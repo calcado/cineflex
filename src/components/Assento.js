@@ -1,8 +1,6 @@
-import { Form } from "react-router-dom";
 import styled from "styled-components";
 
-
-export default function Assento({name, id, disponivel,selecionados, setSelecionados,form,setForm, nameAssento, setNameAssento}){
+export default function Assento({name, id, disponivel,selecionados, setSelecionados, nameAssento, setNameAssento}){
 
     function selecionarAssento(id,name){
       

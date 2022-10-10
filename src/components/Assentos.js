@@ -5,7 +5,7 @@ import { Link, useParams } from 'react-router-dom';
 import Assento from "./Assento.js"
 import { useNavigate } from 'react-router-dom';
 
-export default function Assentos({seat, setSeat, titulo, form, setForm, nameAssento,setNameAssento}) {
+export default function Assentos({seat, setSeat, form, setForm, nameAssento,setNameAssento}) {
     const {idSessao} = useParams()
     const [selecionados, setSelecionados]= useState([])
     const navigate = useNavigate()
@@ -57,7 +57,7 @@ export default function Assentos({seat, setSeat, titulo, form, setForm, nameAsse
                 form={form}
                 setForm={setForm}
                 nameAssento={nameAssento}
-                setNameAssento={setNameAssento} 
+                setNameAssento={setNameAssento}
               />
             ))}
           </Cadeiras>
@@ -77,16 +77,34 @@ export default function Assentos({seat, setSeat, titulo, form, setForm, nameAsse
           </Status>
           <Info onSubmit={pedir}>
             <p>Nome do comprador:</p>
-            <input name="name" onChange={handleForm} value={form.name} type="text" placeholder="Digite seu nome..." />
-            
+            <input
+              name="name"
+              onChange={handleForm}
+              value={form.name}
+              type="text"
+              placeholder="Digite seu nome..."
+              required
+            />
+
             <p>CPF do comprador:</p>
-            <input name="cpf" onChange={handleForm} value={form.cpf} type="text" placeholder="Digite seu CPF..." />
+            <input
+              name="cpf"
+              onChange={handleForm}
+              value={form.cpf}
+              type="text"
+              placeholder="Digite seu CPF..."
+              required
+            />
             <Reservar type="submit">Reservar assento(s)</Reservar>
           </Info>
         </SeatsPage>
         <Footer>
           <Img src={seat.movie.posterURL} alt={seat.movie.title} />
-          <Titulo>{seat.movie.title}<br/>{seat.day.weekday}-{seat.name}</Titulo>
+          <Titulo>
+            {seat.movie.title}
+            <br />
+            {seat.day.weekday}-{seat.name}
+          </Titulo>
         </Footer>
       </>
     );

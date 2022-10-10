@@ -3,12 +3,7 @@ import { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Link, useParams } from "react-router-dom";
 
-export default function PaginaPrincipal({
-  idFilme,
-  setIdFilme,
-  titulo,
-  setTitulo,
-}) {
+export default function PaginaPrincipal({ idFilme }) {
   const [filmes, setFilme] = useState([]);
 
   useEffect(() => {
@@ -28,7 +23,7 @@ export default function PaginaPrincipal({
       <Selecione>Selecione o Filme</Selecione>
       <Lista>
         {filmes.map((filme) => (
-          <li key={filme.id} >
+          <li key={filme.id}>
             <Link to={`/sessoes/${filme.id}`}>
               <Cartaz src={filme.posterURL} alt={filme.title} />
             </Link>
@@ -38,11 +33,6 @@ export default function PaginaPrincipal({
     </MainPage>
   );
 }
-// onClick={setIdFilme(filme.id)}
-const MainPage = styled.main`
-  background-color: #FFFFFF;
-  overflow-y: auto;
-`;
 
 const Selecione = styled.span`
   display: flex;
@@ -54,6 +44,11 @@ const Selecione = styled.span`
   height: 110px;
   width: 100%;
   color: #293845;
+`;
+
+const MainPage = styled.main`
+  background-color: #FFFFFF;
+  overflow-y: auto;
 `;
 
 const Lista = styled.ul`
